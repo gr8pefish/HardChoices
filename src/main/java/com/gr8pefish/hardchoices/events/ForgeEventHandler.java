@@ -23,6 +23,7 @@ public class ForgeEventHandler {
     @SubscribeEvent
     public void onDeath(LivingDeathEvent event){
         if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
+            //Add in config death option here
             CommonProxy.saveProxyData((EntityPlayer) event.entity);
         }
     }

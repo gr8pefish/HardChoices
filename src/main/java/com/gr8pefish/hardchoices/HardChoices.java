@@ -30,12 +30,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 TODO
 
 Immediate:
-
-Fix saving
--> Updates server not client, then both once something crafted, then when loaded weird things happen
-Initialize ExtendedPlayer.disabledmods
+can't get eventHandler field
 
 Later:
+only overwrite mod recipes that come from the disabledModsList (if possible)
 add in tooltip that warns player about deleting mod
 commands to directly enable/disable mods (if OP)
 config option dying resets disabled mods (off by default)

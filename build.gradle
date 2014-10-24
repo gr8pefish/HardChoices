@@ -1,4 +1,3 @@
-import com.gr8pefish.hardchoices.ModInformation
 
 buildscript {
     repositories {
@@ -19,9 +18,10 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = ModInformation.VERSION
+//version = ModInformation.VERSION
+version = "1.7.10-0.6.5"
 group= "com.gr8pefish.hardchoices" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = ModInformation.NAME
+archivesBaseName = "HardChoices"
 
 minecraft {
     version = "1.7.10-10.13.0.1208"

@@ -63,7 +63,6 @@ public class CommonProxy {
             playerData.loadNBTData(savedData);
         }
 
-        playerData.syncData();
     }
 }
 
