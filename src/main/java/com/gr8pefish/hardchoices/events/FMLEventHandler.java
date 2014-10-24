@@ -1,24 +1,18 @@
 package com.gr8pefish.hardchoices.events;
 
-import com.gr8pefish.hardchoices.Logger;
+import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
-import com.gr8pefish.hardchoices.players.ExtendedPlayer;
-import com.gr8pefish.hardchoices.players.PlayerData;
 import com.gr8pefish.hardchoices.proxies.CommonProxy;
-import com.gr8pefish.hardchoices.recipes.RecipeHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.nbt.NBTTagCompound;
-
-import java.util.Arrays;
 
 public class FMLEventHandler {
+
+    /*
+    When an item is crafted, check if the item is from a modset in the config file, and disable the mods in it's set if needed
+     */
 
 //    @SideOnly(Side.SERVER)
     @SubscribeEvent //fires on both client and server
@@ -32,7 +26,7 @@ public class FMLEventHandler {
                 }else{
                     if (!mod.getBlacklistGroupDisabled()){ //if mod group isn't disabled
                         mod.disableGroupMods(event.player);            //disable them
-                        CommonProxy.saveProxyData(event.player);
+                        CommonProxy.saveProxyData(event.player);       //save changes TODO - not working
                     }
                 }
             }

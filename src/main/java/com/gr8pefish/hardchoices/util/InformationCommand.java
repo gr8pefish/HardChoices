@@ -1,20 +1,13 @@
 package com.gr8pefish.hardchoices.util;
 
-import com.gr8pefish.hardchoices.Logger;
 import com.gr8pefish.hardchoices.handlers.ConfigHandler;
-import com.gr8pefish.hardchoices.handlers.DisabledHandler;
-import com.gr8pefish.hardchoices.mods.DisabledMod;
 import com.gr8pefish.hardchoices.players.ExtendedPlayer;
-import com.gr8pefish.hardchoices.players.PlayerData;
-import com.gr8pefish.hardchoices.recipes.RecipeHelper;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -40,6 +33,10 @@ public class InformationCommand implements ICommand {
         return null;
     }
 
+    /*
+    Called when the command is used. Currently prints information to the chat.
+     */
+
     @Override
     public void processCommand(ICommandSender sender, String[] strings) {
         EntityPlayer player;
@@ -49,20 +46,13 @@ public class InformationCommand implements ICommand {
             ChatComponentText groups = new ChatComponentText("Categories:  ");
             ChatComponentText disabled = new ChatComponentText("Disabled: ");
 
-            try {
-                ExtendedPlayer newPlayer = ExtendedPlayer.get(player);
-                Set<String> keys = newPlayer.disabledMods.keySet();
-                for (String key: keys){
-                    disabled.appendText(key);
-                    disabled.appendText(newPlayer.disabledMods.get(key).toString());
-//                    if (!(newPlayer.disabledMods.get(key))){
-//                        disabled.appendText(key);
-//                    }
-                }
-            } catch (ClassCastException e){
-                Logger.log("Couldn't cast to extended player");
-            }
 
+            ExtendedPlayer newPlayer = ExtendedPlayer.get(player);
+            Set<String> keys = newPlayer.disabledMods.keySet();
+            for (String key: keys){
+                disabled.appendText(key);
+                disabled.appendText(newPlayer.disabledMods.get(key).toString());
+            }
             ArrayList<String> allModSets = ConfigHandler.blackList;
             for (int i = 0; i < allModSets.size(); i++){
                 groups.appendText("Category "+i+": "+allModSets.get(i) + "     ");
@@ -81,7 +71,6 @@ public class InformationCommand implements ICommand {
     @Override
     public List addTabCompletionOptions(ICommandSender sender, String[] strings) {
         return this.aliases;
-//        return null;
     }
 
     @Override

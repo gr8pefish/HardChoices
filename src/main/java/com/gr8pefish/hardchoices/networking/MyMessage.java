@@ -1,6 +1,7 @@
 package com.gr8pefish.hardchoices.networking;
 
-import com.gr8pefish.hardchoices.Logger;
+import com.gr8pefish.hardchoices.util.Logger;
+import com.gr8pefish.hardchoices.players.ExtendedPlayer;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
@@ -32,7 +33,11 @@ public class MyMessage implements IMessage{
         @Override
         public IMessage onMessage(MyMessage message, MessageContext ctx){
             Logger.log(String.format("Received %s from %s", message.text, ctx.getServerHandler().playerEntity.getDisplayName()));
-            return null;
+
+            ExtendedPlayer player = ExtendedPlayer.get(ctx.getServerHandler().playerEntity);
+            player.syncData(); //currently doesn't do anything
+
+            return null; //I shouldn't need to return a message, I just need to update the player's data
         }
     }
 

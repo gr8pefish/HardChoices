@@ -1,6 +1,6 @@
 package com.gr8pefish.hardchoices.recipes;
 
-import com.gr8pefish.hardchoices.Logger;
+import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
 import net.minecraft.inventory.Container;
@@ -14,6 +14,12 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import java.lang.reflect.Field;
+
+/*
+
+Currently unused. I would like to eventually make each recipe that is an instance of IRecipe follow my other classes, but that will have to wait until I fix the more basic issues.
+
+ */
 
 public class DisabledRecipes implements IRecipe { //DisabledShapedOreRecipe , ShapelessOreRecipe
 

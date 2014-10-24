@@ -19,6 +19,8 @@ public class CommonProxy {
 		
 	}
 
+    //Start of additional code to save the player's data somewhere where it won't disappear when they die.
+
     /**
      * Adds an entity's custom data to the map for temporary storage
      * @param compound An NBT Tag Compound that stores the IExtendedEntityProperties data only
@@ -60,8 +62,8 @@ public class CommonProxy {
         if(savedData != null) {
             playerData.loadNBTData(savedData);
         }
-        // note we renamed 'syncExtendedProperties' to 'syncProperties' because yay, it's shorter
-//        playerData.syncProperties();
+
+        playerData.syncData();
     }
 }
 

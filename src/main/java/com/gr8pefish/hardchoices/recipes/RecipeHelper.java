@@ -1,22 +1,26 @@
 package com.gr8pefish.hardchoices.recipes;
 
-import com.gr8pefish.hardchoices.Logger;
+import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
-import com.gr8pefish.hardchoices.players.ExtendedPlayer;
 import com.gr8pefish.hardchoices.players.PlayerData;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.lang.reflect.Field;
 import java.util.Set;
 
 public class RecipeHelper {
 
+    /*
+    Returns the crafting result from an inventoryCrafting.
+
+    Returning null means the player (accessed through reflection) does not have permission to craft that item.
+    Otherwise, the original output is returned.
+     */
     public static ItemStack getCraftingResult(InventoryCrafting inventoryCrafting, IRecipe originalRecipe){
         try{
             Field container = inventoryCrafting.getClass().getDeclaredField("eventHandler");
@@ -24,7 +28,6 @@ public class RecipeHelper {
             try {
                 Object instanceContainer = container.get(inventoryCrafting);
                 if (instanceContainer.getClass().equals(ContainerWorkbench.class)){
-//                  if (false){
                     ContainerWorkbench containerWorkbench = (ContainerWorkbench) instanceContainer;
                     SlotCrafting firstSlot = (SlotCrafting) containerWorkbench.getSlot(0);
                     try{
@@ -59,7 +62,7 @@ public class RecipeHelper {
                         Logger.log("Illegal access to player");
                     }
                 Logger.log(instanceContainer.getClass().getName());
-                }else if (instanceContainer.getClass().isAssignableFrom(Container.class)){ //TODO, fix this: it isn't true when it should be (x instanceof y)
+                }else if (instanceContainer.getClass().isAssignableFrom(Container.class)){ //TODO, fix this: it isn't true when it should be (maybe change to x instanceof y)
                     Container containerUsed = (Container) instanceContainer;
                     Logger.log("container");
                     try{
@@ -83,7 +86,7 @@ public class RecipeHelper {
     }
 
 
-    public static boolean isItemDisabled(ItemStack stack){ //TODO unused
+    public static boolean isItemDisabled(ItemStack stack){ //TODO deprecated?
         GameRegistry.UniqueIdentifier identifier = GameRegistry.findUniqueIdentifierFor(stack.getItem());
         for (DisabledMod mod : DisabledHandler.disabledModsList){
             if (mod.getDisabled() && mod.getModId().equals(identifier.modId)){

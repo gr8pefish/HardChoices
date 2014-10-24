@@ -1,6 +1,6 @@
 package com.gr8pefish.hardchoices.mods;
 
-import com.gr8pefish.hardchoices.Logger;
+import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.handlers.ConfigHandler;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
 import com.gr8pefish.hardchoices.players.ExtendedPlayer;
@@ -8,6 +8,9 @@ import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+//The initial way I was handling disabling mods (before it was on a per-player basis)
+//DEPRECATED (but keeping it for now in case I have to use some of this code later)
 
 public class DisabledMod {
 

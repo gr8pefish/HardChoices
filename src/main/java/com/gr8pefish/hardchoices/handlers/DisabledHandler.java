@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 
 import com.gr8pefish.hardchoices.HardChoices;
-import com.gr8pefish.hardchoices.Logger;
+import com.gr8pefish.hardchoices.util.Logger;
 
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
@@ -19,10 +19,12 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public class DisabledHandler {
 
     public static ArrayList<DisabledMod> disabledModsList = new ArrayList<DisabledMod>();
+
     private static ArrayList<ShapedOreRecipe> registeredShapedOreRecipes;
     private static ArrayList<ShapelessOreRecipe> registeredShapelessOreRecipes;
     private static ArrayList<ShapedRecipes> registeredShapedRecipes;
     private static ArrayList<ShapelessRecipes> registeredShapelessRecipes;
+
     private static ArrayList<Object> registeredRecipes;
 
 	
@@ -54,9 +56,11 @@ public class DisabledHandler {
             }
         }
 
-        initDisabledMods(); //TODO make it return lowercase
+        initDisabledMods(); //TODO make it return lowercase (unless I just handle it later, which I can)
         changeRecipes();
 	}
+
+    //initialize the disabled mods from the config file
 
     public static void initDisabledMods(){
         ArrayList<String> allModSets = ConfigHandler.blackList;
@@ -74,45 +78,18 @@ public class DisabledHandler {
         }
     }
 
-    private static void addDisabledMods(String modid){
-        ArrayList<String> allModSets = ConfigHandler.blackList;
-        String[] splitString;
-        for (String modGroup : allModSets) {
-            splitString = modGroup.split(",");
-            if (splitString.length<2){
-                Logger.log("Need more than one mod per set to disable: "+splitString[0]);
-                continue;
-            }
-            if (modGroup.contains(modid)){
-                for (String configModId : splitString){
-                    if (!configModId.equals(modid)){
-                        //TODO
-                        //disable mod
-                        Logger.log("Disabling mod"+configModId);
-                    }
-                }
-            }
-        }
-    }
-
-    private static void disableCrafting(){
-        //TODO?
-    }
+    //Change out the old recipes for my version of the recipe, with the overridden getCraftingResult
 
     public static void changeRecipes(){
-//        for (ShapedOreRecipe recipe: registeredShapedOreRecipes) {
-//            DisabledShapedOreRecipe newRecipe = new DisabledShapedOreRecipe(recipe); //TODO then what? should wrap the old recipe around new class somehow...
-////            recipe = new DisabledRecipes();
-//            Logger.log(recipe.getRecipeOutput().getUnlocalizedName());
-//        }
+        //TODO initialize for all recipes that implement IRecipe (dynamically if possible, so other mods' special recipe types work)
 
         for (ShapedRecipes recipe : registeredShapedRecipes) {
             DisabledBaseShapedRecipes.init(recipe);
         }
 
-//        for (IRecipe recipe: registeredRecipes){
-//            Logger.log(recipe.getRecipeOutput().getUnlocalizedName());
-//        }
+        for (ShapedOreRecipe recipe : registeredShapedOreRecipes) {
+            DisabledBaseShapedRecipes.init(recipe);
+        }
 
     }
 

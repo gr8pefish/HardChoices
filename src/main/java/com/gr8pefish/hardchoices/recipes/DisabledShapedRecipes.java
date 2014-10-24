@@ -1,13 +1,8 @@
 package com.gr8pefish.hardchoices.recipes;
 
-import com.gr8pefish.hardchoices.Logger;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.ShapedRecipes;
-
-import java.lang.reflect.Field;
 
 public class DisabledShapedRecipes extends ShapedRecipes{
 
@@ -19,7 +14,8 @@ public class DisabledShapedRecipes extends ShapedRecipes{
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) { //all this is just to get the player that is crafting to check if they are "allowed" to craft this item
+    //Checks, via a helper method, what the crafting result should be (null or the original result)
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
         return RecipeHelper.getCraftingResult(inventoryCrafting, originalShapedRecipes);
     }
 }

@@ -10,8 +10,10 @@ import net.minecraftforge.common.config.Property;
 
 
 public class ConfigHandler {
-	public static ArrayList<String> blackList;
-//	public static boolean useDisableItem;
+
+    public static ArrayList<String> blackList;
+    //public static Boolean useDisableItem;
+    //public static Boolean resetOnDeath;
 
 	public static void init(File file)
 	{
@@ -32,11 +34,16 @@ public class ConfigHandler {
                             + "  ThermalExpansion,MinefactoryReloaded\n "
                             + " >\n";
 		blackList.addAll(Arrays.asList(blacklistP.getStringList())); //TODO make lowercase
-		
+
+        //TODO - these features eventually
 //		Property category2 = config.get("DisableItem", "disableItem", true);
-//		category2.comment = "Choose true if you would like the output of a mods mod's recipe to be a special 'di item'.\n"
+//		category2.comment = "Choose true if you would like the output of a mods mod's recipe to be a special 'disabled item'.\n"
 //							+"Enter false to simply have nothing appear instead.";
-//        useDisableItem = (category2.getBoolean());
+//      useDisableItem = (category2.getBoolean());
+
+//		Property category3 = config.get("Gameplay", "gameplay", false);
+//		category2.comment = "Choose true if you would like the player's disabled mods to reset on death."
+//      resetOnDeath = (category3.getBoolean());
 		
 		config.save();
 	}

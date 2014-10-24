@@ -1,25 +1,22 @@
-DimensionGuard
+HardChoices
 ==============
 
-Configurable filtering of Items, Blocks and Entities by Dimension
+Filtering of Mods' Recipes by config-based grouping
 
 Format
 ==============
 All names are case-insensitive
+If you are unsure of the mod name, check the en_us.lang localization file in the resources folder of said mod, that should contain it's id.
 
-Blocks and Items
+Example
 --------------
-modid:block/item(:metadata optional),dimension list
+CarpentersBlocks,Chisel
+BloodMagic,Thaumcraft,Witchery
 
-Entities
---------------
-entity name, dimension list
-
-Wildcards
---------------
-For IDs, names and metadata the wildcard \* selects for "any match" so for example "\*spider" will select both Spider and CaveSpider, whereas "spider\*" will only select Spider.
-
-For Dimensions you can define single dimensions (0), ranges (0:5), and use the ++ or -- wildcards to signify more or less than the preceding number (eg 1++)
+Github
+===========
+I am well aware I am an amateur programmer, so if you see something that could be improved, feel free to submit a PR.
+Bug Reports/Issues are always welcome too.
 
 
 License

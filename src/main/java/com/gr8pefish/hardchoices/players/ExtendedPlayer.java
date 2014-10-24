@@ -1,7 +1,6 @@
 package com.gr8pefish.hardchoices.players;
 
 import com.gr8pefish.hardchoices.HardChoices;
-import com.gr8pefish.hardchoices.Logger;
 import com.gr8pefish.hardchoices.ModInformation;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
@@ -12,11 +11,14 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
+
+/*
+
+A player class that is extended to include a map of the disabled mods for that player to be used when checking crafting recipes. Format is <modid, boolean>, where the boolean describes if it is disabled.
+
+ */
 
 public class ExtendedPlayer implements IExtendedEntityProperties {
 
@@ -40,7 +42,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
     public static final ExtendedPlayer get(EntityPlayer player){
         return (ExtendedPlayer) player.getExtendedProperties(EXTENDED_PLAYER_DISABLED_MODS);
     }
-
 
 
     @Override
@@ -76,14 +77,10 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
     public void init(Entity entity, World world) {
     }
 
-    public NBTTagCompound getExtProps()
-    {
-        return extendedPlayerCompound;
-    }
 
-    public void setExtProps(NBTTagCompound parCompound)
-    {
-        extendedPlayerCompound = parCompound;
+    public void syncData(){
+        //TODO not sure what to put here
+
     }
 
     public void initDisabledMods(){
