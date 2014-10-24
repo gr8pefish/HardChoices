@@ -1,0 +1,17 @@
+[
+  {
+    "modid": "hardchoices",
+    "name": "HardChoices",
+    "description": "Configurable prevention of mod usage",
+	"version": "${version}",
+	"mcversion": "${mcversion}",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["gr8pefish"],
+    "credits": "hilburn for DimensionGuard",
+    "logoFile": "",
+    "screenshots": [],
+    "parent":"",
+    "dependencies": []
+  }
+]
