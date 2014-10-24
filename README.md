@@ -10,8 +10,9 @@ If you are unsure of the mod name, check the en_us.lang localization file in the
 
 Example
 --------------
-CarpentersBlocks,Chisel
-BloodMagic,Thaumcraft,Witchery
+\> CarpentersBlocks,Chisel
+
+BloodMagic,Thaumcraft,Witchery <
 
 Github
 ===========
