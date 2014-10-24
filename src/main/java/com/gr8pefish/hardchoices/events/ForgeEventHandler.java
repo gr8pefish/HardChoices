@@ -31,6 +31,7 @@ public class ForgeEventHandler {
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event){
         if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
+            //check if the world is a new one
             CommonProxy.loadProxyData((EntityPlayer) event.entity);
         }
     }

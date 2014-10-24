@@ -30,7 +30,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 TODO
 
 Immediate:
-can't get eventHandler field
+Use obfuscationReflectionHelper
+change it so each save/world has new data for the player (onEntityConstructing?)
+make sure all lowercase for mods
+loop through players mods lists when checking to see if a mod should be disabled in onCraftedEvent (instead of DisabledMods list)
 
 Later:
 only overwrite mod recipes that come from the disabledModsList (if possible)

@@ -1,10 +1,12 @@
 package com.gr8pefish.hardchoices.recipes;
 
+import com.gr8pefish.hardchoices.HardChoices;
 import com.gr8pefish.hardchoices.networking.NetworkingHelper;
 import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
 import com.gr8pefish.hardchoices.players.PlayerData;
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.*;
@@ -16,6 +18,18 @@ import java.util.Set;
 
 public class RecipeHelper {
 
+//    private static final String fieldOne = "eventHandler";
+//    private static final String fieldTwo = "thePlayer";
+//    private static final String fieldThree = "thePlayer";
+//    private static final String fieldFour = "playerList";
+
+    private static final String fieldOne = "field_70465_c";
+    private static final String fieldTwo = "field_75238_b";
+    private static final String fieldThree = "field_82862_h";
+    private static final String fieldFour = "field_75148_f";
+
+
+
     /*
     Returns the crafting result from an inventoryCrafting.
 
@@ -24,7 +38,8 @@ public class RecipeHelper {
      */
     public static ItemStack getCraftingResult(InventoryCrafting inventoryCrafting, IRecipe originalRecipe){
         try{
-            Field container = inventoryCrafting.getClass().getDeclaredField("eventHandler");
+//            Object instanceContainer = ObfuscationReflectionHelper.getPrivateValue(InventoryCrafting.class, inventoryCrafting, "eventHandler");
+            Field container = inventoryCrafting.getClass().getDeclaredField(fieldOne);
             container.setAccessible(true);
             try {
                 Object instanceContainer = container.get(inventoryCrafting);
@@ -32,7 +47,7 @@ public class RecipeHelper {
                     ContainerWorkbench containerWorkbench = (ContainerWorkbench) instanceContainer;
                     SlotCrafting firstSlot = (SlotCrafting) containerWorkbench.getSlot(0);
                     try{
-                        Field player = firstSlot.getClass().getDeclaredField("thePlayer");
+                        Field player = firstSlot.getClass().getDeclaredField(fieldTwo);
                         player.setAccessible(true);
                         try{
                             EntityPlayer thePlayer = (EntityPlayer) player.get(firstSlot);
@@ -52,7 +67,7 @@ public class RecipeHelper {
                         Logger.log("No player field.");
                     }
                 }else if (instanceContainer.getClass().equals(ContainerPlayer.class)){
-                    Field player = instanceContainer.getClass().getDeclaredField("thePlayer");
+                    Field player = instanceContainer.getClass().getDeclaredField(fieldThree);
                     player.setAccessible(true);
                     try {
                         EntityPlayer thePlayer = (EntityPlayer) player.get(instanceContainer);
@@ -68,7 +83,7 @@ public class RecipeHelper {
                     Container containerUsed = (Container) instanceContainer;
                     Logger.log("container");
                     try{
-                        Field set = containerUsed.getClass().getDeclaredField("playerList");
+                        Field set = containerUsed.getClass().getDeclaredField(fieldFour);
                         set.setAccessible(true);
                         Set theSet = (Set) set.get(containerUsed);
                         for (Object player: theSet){

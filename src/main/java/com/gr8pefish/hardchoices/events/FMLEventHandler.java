@@ -25,10 +25,10 @@ public class FMLEventHandler {
         Logger.log(event.player.getDisplayName() + " crafted an item from the mod " + identifier.modId + " in the inventory " + event.craftMatrix.getInventoryName());
         for (DisabledMod mod : DisabledHandler.disabledModsList){
             if (identifier.modId.equals(mod.getModId())){
-                if (mod.getDisabled()){
+                if (mod.getDisabled()){ //should probably change to be player specific
                     //disabled recipes handled by DisabledRecipes already
                 }else{
-                    if (!mod.getBlacklistGroupDisabled()){ //if mod group isn't disabled
+                    if (!mod.getBlacklistGroupDisabled()){ //if mod group isn't disabled (TODO - CHANGE TO BE PLAYER SPECIFIC)
                         mod.disableGroupMods(event.player);             //disable them
                         CommonProxy.saveProxyData(event.player);        //save changes
                         HardChoices.network.sendToServer(new MyMessage("updtCrftng"));     //send message form client to server to update
