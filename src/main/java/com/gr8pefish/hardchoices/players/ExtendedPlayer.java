@@ -26,7 +26,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
     private final EntityPlayer player;
     public HashMap<String, Boolean> disabledMods;
 
-    protected NBTTagCompound extendedPlayerCompound = new NBTTagCompound();
+    public NBTTagCompound extendedPlayerCompound = new NBTTagCompound();
 
 
     public ExtendedPlayer(EntityPlayer player){
@@ -46,11 +46,8 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 
     @Override
     public void saveNBTData(NBTTagCompound compound) {
-        //TODO start debugging here
-//        HardChoices.network.sendToServer(new MyMessage("testing message"));
-
         //load in data, load config + check if name is present in data, if not, add it in
-        //groups come solely from config, read every time
+        //groups come solely from config, read every time (inefficient, but the only way to make it work with changed configs when a world is already made)
         for (int i = 0; i < DisabledHandler.disabledModsList.size(); i++) {
             for (DisabledMod modName : DisabledHandler.disabledModsList) {
                 if (this.disabledMods.containsKey(modName.getModId())) {
@@ -77,12 +74,6 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
     public void init(Entity entity, World world) {
     }
 
-
-    public void syncData(){
-        //TODO not sure what to put here
-        //need to send a message to the server to tell it what happened
-
-    }
 
     public void initDisabledMods(){
         for (int i = 0; i < DisabledHandler.disabledModsList.size(); i++) {

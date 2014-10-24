@@ -19,16 +19,5 @@ public class NetworkingHelper {
             Logger.log("Server side");
         }
     }
-    public void Info(EntityPlayer player) {
 
-        // Sending packet to server
-        IMessage msg = new SimplePacket.SimpleMessage(500, true);
-        PacketHandler.net.sendToServer(msg);
-
-        // Sending packet to client
-        if (player instanceof EntityPlayerMP) {
-            IMessage message = new SimplePacket.SimpleMessage(800, false);
-            PacketHandler.net.sendTo(message, (EntityPlayerMP) player);
-        }
-    }
 }

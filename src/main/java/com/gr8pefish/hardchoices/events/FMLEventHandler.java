@@ -1,5 +1,8 @@
 package com.gr8pefish.hardchoices.events;
 
+import com.gr8pefish.hardchoices.HardChoices;
+import com.gr8pefish.hardchoices.networking.MyMessage;
+import com.gr8pefish.hardchoices.players.ExtendedPlayer;
 import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
@@ -7,6 +10,7 @@ import com.gr8pefish.hardchoices.proxies.CommonProxy;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class FMLEventHandler {
 
@@ -26,8 +30,8 @@ public class FMLEventHandler {
                 }else{
                     if (!mod.getBlacklistGroupDisabled()){ //if mod group isn't disabled
                         mod.disableGroupMods(event.player);             //disable them
-                        CommonProxy.saveProxyData(event.player);        //save changes TODO - not working
-                                                                        //send message to server
+                        CommonProxy.saveProxyData(event.player);        //save changes
+                        HardChoices.network.sendToServer(new MyMessage("updtCrftng"));     //send message form client to server to update
                     }
                 }
             }
