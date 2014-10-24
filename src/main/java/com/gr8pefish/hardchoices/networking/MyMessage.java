@@ -37,7 +37,7 @@ public class MyMessage implements IMessage{
             ExtendedPlayer player = ExtendedPlayer.get(ctx.getServerHandler().playerEntity);
             player.syncData(); //currently doesn't do anything
 
-            return null; //I shouldn't need to return a message, I just need to update the player's data
+            return null; //I shouldn't need to return a message, I just need to update the player's data on the server side when I get a message from the client
         }
     }
 

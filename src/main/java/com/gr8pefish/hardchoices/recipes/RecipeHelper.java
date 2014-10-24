@@ -1,5 +1,6 @@
 package com.gr8pefish.hardchoices.recipes;
 
+import com.gr8pefish.hardchoices.networking.NetworkingHelper;
 import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
@@ -36,6 +37,7 @@ public class RecipeHelper {
                         try{
                             EntityPlayer thePlayer = (EntityPlayer) player.get(firstSlot);
 //                            Logger.log("Player who is crafting: " + thePlayer.getDisplayName());
+                            NetworkingHelper.printSides(thePlayer);
                             Logger.log("isRecipeDisabled: "+PlayerData.isModDisabledForPlayer(thePlayer, originalRecipe.getRecipeOutput()));
                             if (PlayerData.isModDisabledForPlayer(thePlayer, originalRecipe.getRecipeOutput())){
                                 return null;

@@ -2,7 +2,7 @@ package com.gr8pefish.hardchoices.handlers;
 
 import java.util.*;
 
-import com.gr8pefish.hardchoices.recipes.DisabledBaseShapedRecipes;
+import com.gr8pefish.hardchoices.recipes.DisabledBaseRecipes;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -84,11 +84,11 @@ public class DisabledHandler {
         //TODO initialize for all recipes that implement IRecipe (dynamically if possible, so other mods' special recipe types work)
 
         for (ShapedRecipes recipe : registeredShapedRecipes) {
-            DisabledBaseShapedRecipes.init(recipe);
+            DisabledBaseRecipes.init(recipe);
         }
 
         for (ShapedOreRecipe recipe : registeredShapedOreRecipes) {
-            DisabledBaseShapedRecipes.init(recipe);
+            DisabledBaseRecipes.init(recipe);
         }
 
     }

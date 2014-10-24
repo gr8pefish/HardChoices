@@ -5,7 +5,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class DisabledBaseShapedRecipes {
+public class DisabledBaseRecipes {
 
     public static ShapedRecipes shapedRecipe;
     public static ShapedOreRecipe shapedOreRecipe;
@@ -21,10 +21,10 @@ public class DisabledBaseShapedRecipes {
 
     public static void  init(ShapedOreRecipe shapedOre){
 
-        shapedOreRecipe = new DisabledShapedOreRecipe(shapedOre);
-
-        GameRegistry.addRecipe(shapedOreRecipe);
-        CraftingManager.getInstance().getRecipeList().remove(shapedOre);
+//        shapedOreRecipe = new DisabledShapedOreRecipe(shapedOre);
+//
+//        GameRegistry.addRecipe(shapedOreRecipe);
+//        CraftingManager.getInstance().getRecipeList().remove(shapedOre);
 
     }
 }

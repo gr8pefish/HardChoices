@@ -1,6 +1,8 @@
 package com.gr8pefish.hardchoices.util;
 
+import com.gr8pefish.hardchoices.HardChoices;
 import com.gr8pefish.hardchoices.handlers.ConfigHandler;
+import com.gr8pefish.hardchoices.networking.MyMessage;
 import com.gr8pefish.hardchoices.players.ExtendedPlayer;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -35,10 +37,14 @@ public class InformationCommand implements ICommand {
 
     /*
     Called when the command is used. Currently prints information to the chat.
+    TODO - make it format nicer in the chat
      */
 
     @Override
     public void processCommand(ICommandSender sender, String[] strings) {
+
+        HardChoices.network.sendToServer(new MyMessage("update player data"));
+
         EntityPlayer player;
         if(sender instanceof EntityPlayer) {
             player = (EntityPlayer) sender;

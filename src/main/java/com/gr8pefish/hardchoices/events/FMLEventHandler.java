@@ -25,11 +25,14 @@ public class FMLEventHandler {
                     //disabled recipes handled by DisabledRecipes already
                 }else{
                     if (!mod.getBlacklistGroupDisabled()){ //if mod group isn't disabled
-                        mod.disableGroupMods(event.player);            //disable them
-                        CommonProxy.saveProxyData(event.player);       //save changes TODO - not working
+                        mod.disableGroupMods(event.player);             //disable them
+                        CommonProxy.saveProxyData(event.player);        //save changes TODO - not working
+                                                                        //send message to server
                     }
                 }
             }
         }
     }
+
+
 }

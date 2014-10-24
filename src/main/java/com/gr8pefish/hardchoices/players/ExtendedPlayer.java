@@ -47,7 +47,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
     @Override
     public void saveNBTData(NBTTagCompound compound) {
         //TODO start debugging here
-        HardChoices.network.sendToServer(new MyMessage("testing message"));
+//        HardChoices.network.sendToServer(new MyMessage("testing message"));
 
         //load in data, load config + check if name is present in data, if not, add it in
         //groups come solely from config, read every time
@@ -80,6 +80,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 
     public void syncData(){
         //TODO not sure what to put here
+        //need to send a message to the server to tell it what happened
 
     }
 
