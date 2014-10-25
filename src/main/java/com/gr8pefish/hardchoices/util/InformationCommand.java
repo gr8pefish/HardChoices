@@ -49,19 +49,26 @@ public class InformationCommand implements ICommand {
         if(sender instanceof EntityPlayer) {
             player = (EntityPlayer) sender;
 
-            ChatComponentText groups = new ChatComponentText("Categories:  ");
+            ChatComponentText groups = new ChatComponentText("");
             ChatComponentText disabled = new ChatComponentText("Disabled: ");
 
 
+            boolean addedDisabledMods = false;
             ExtendedPlayer newPlayer = ExtendedPlayer.get(player);
             Set<String> keys = newPlayer.disabledMods.keySet();
             for (String key: keys){
-                disabled.appendText(key);
-                disabled.appendText(newPlayer.disabledMods.get(key).toString());
+                if (newPlayer.disabledMods.get(key)) {
+                    disabled.appendText(key+" ");
+                    addedDisabledMods = true;
+                }
             }
+            if (!addedDisabledMods) {
+                disabled.appendText("None");
+            }
+
             ArrayList<String> allModSets = ConfigHandler.blackList;
             for (int i = 0; i < allModSets.size(); i++){
-                groups.appendText("Category "+i+": "+allModSets.get(i) + "     ");
+                groups.appendText("Category "+i+") "+allModSets.get(i) + "     ");
             }
 
             player.addChatMessage(groups);

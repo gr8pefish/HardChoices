@@ -33,7 +33,10 @@ public class ConfigHandler {
                             + "  Thaumcraft,BloodMagic,Witchery\n"
                             + "  ThermalExpansion,MinefactoryReloaded\n "
                             + " >\n";
-		blackList.addAll(Arrays.asList(blacklistP.getStringList())); //TODO make lowercase
+		blackList.addAll(Arrays.asList(blacklistP.getStringList()));
+        for(int i=0; i < blackList.size(); i++) {
+            blackList.set(i, blackList.get(i).toLowerCase().trim());
+        }
 
         //TODO - these features eventually
 //		Property category2 = config.get("DisableItem", "disableItem", true);

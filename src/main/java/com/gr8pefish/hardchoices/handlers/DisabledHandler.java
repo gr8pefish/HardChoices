@@ -2,6 +2,7 @@ package com.gr8pefish.hardchoices.handlers;
 
 import java.util.*;
 
+import com.gr8pefish.hardchoices.players.PlayerData;
 import com.gr8pefish.hardchoices.recipes.DisabledBaseRecipes;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
 import net.minecraft.item.crafting.CraftingManager;
@@ -56,8 +57,9 @@ public class DisabledHandler {
             }
         }
 
-        initDisabledMods(); //TODO make it return lowercase (unless I just handle it later, which I can)
+        initDisabledMods();
         changeRecipes();
+        PlayerData.initModGroups();
 	}
 
     //initialize the disabled mods from the config file
