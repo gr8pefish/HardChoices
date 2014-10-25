@@ -3,6 +3,7 @@ package com.gr8pefish.hardchoices.players;
 import com.gr8pefish.hardchoices.HardChoices;
 import com.gr8pefish.hardchoices.handlers.ConfigHandler;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
+import com.gr8pefish.hardchoices.networking.NetworkingHelper;
 import com.gr8pefish.hardchoices.util.Logger;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -56,7 +57,7 @@ public class PlayerData {
             if (set.contains(modid)) {
                 for (String modId : set){
                     if (!modId.equals(modid)){
-                        return thePlayer.disabledMods.get(modid);
+                        return thePlayer.disabledMods.get(modId);
                     }
                 }
             }
@@ -69,9 +70,11 @@ public class PlayerData {
         for (ArrayList<String> set : modGroups) {
             if (set.contains(modid)){
                 for (String modId : set) {
-                    if (!modId.equals(modid)) {
+                    if (!modId.equals(modid) && !thePlayer.disabledMods.get(modId)) {
                         thePlayer.disabledMods.put(modId, true);
-                        Logger.log("Disabled the mod: "+modId);
+                        if (NetworkingHelper.isClientSide(player)) {
+                            Logger.log("Disabled the mod: " + modId); //Just so it only prints once
+                        }
                     }
                 }
             }

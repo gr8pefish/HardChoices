@@ -6,6 +6,7 @@ import com.gr8pefish.hardchoices.players.PlayerData;
 import com.gr8pefish.hardchoices.recipes.DisabledBaseRecipes;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 
@@ -26,7 +27,7 @@ public class DisabledHandler {
     private static ArrayList<ShapedRecipes> registeredShapedRecipes;
     private static ArrayList<ShapelessRecipes> registeredShapelessRecipes;
 
-    private static ArrayList<Object> registeredRecipes;
+    public static ArrayList<IRecipe> registeredRecipes;
 
 	
 	public static void init(){
@@ -36,24 +37,24 @@ public class DisabledHandler {
         registeredShapelessOreRecipes = new ArrayList<ShapelessOreRecipe>();
         registeredShapedRecipes = new ArrayList<ShapedRecipes>();
         registeredShapelessRecipes = new ArrayList<ShapelessRecipes>();
-        registeredRecipes = new ArrayList<Object>();
+        registeredRecipes = new ArrayList<IRecipe>();
 
         for (Object recipe : CraftingManager.getInstance().getRecipeList()){
             if (recipe.getClass().equals(ShapedOreRecipe.class)) {
                 registeredShapedOreRecipes.add((ShapedOreRecipe) recipe);
-                registeredRecipes.add(recipe);
+                registeredRecipes.add((IRecipe) recipe);
             }else if (recipe.getClass().equals(ShapelessOreRecipe.class)) {
                 registeredShapelessOreRecipes.add( (ShapelessOreRecipe) recipe);
-                registeredRecipes.add(recipe);
+                registeredRecipes.add((IRecipe) recipe);
             }else if (recipe.getClass().equals(ShapedRecipes.class)) {
                 registeredShapedRecipes.add( (ShapedRecipes) recipe);
-                registeredRecipes.add(recipe);
+                registeredRecipes.add((IRecipe) recipe);
             }else if (recipe.getClass().equals(ShapelessRecipes.class)) {
                 registeredShapelessRecipes.add( (ShapelessRecipes) recipe);
-                registeredRecipes.add(recipe);
+                registeredRecipes.add((IRecipe) recipe);
             }else {
                 Logger.log("Unknown recipe type: " + recipe.getClass().getName());
-                registeredRecipes.add(recipe);
+                registeredRecipes.add((IRecipe) recipe);
             }
         }
 

@@ -2,6 +2,7 @@ package com.gr8pefish.hardchoices.recipes;
 
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class DisabledShapedOreRecipe extends ShapedOreRecipe {
@@ -9,7 +10,7 @@ public class DisabledShapedOreRecipe extends ShapedOreRecipe {
     public ShapedOreRecipe originalShapedOreRecipe;
 
     public DisabledShapedOreRecipe(ShapedOreRecipe shapedOreRecipe){
-        super(shapedOreRecipe.getRecipeOutput(), shapedOreRecipe.getInput());
+        super(shapedOreRecipe.getRecipeOutput(), (Object[])shapedOreRecipe.getInput());
         this.originalShapedOreRecipe = shapedOreRecipe;
     }
 

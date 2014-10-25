@@ -32,8 +32,7 @@ TODO
 Immediate:
 Use obfuscationReflectionHelper
 change it so each save/world has new data for the player (onEntityConstructing?)
-make sure all lowercase for mods
-loop through players mods lists when checking to see if a mod should be disabled in onCraftedEvent (instead of DisabledMods list)
+on recipeHelper fix dynamic container not syncing to client
 
 Later:
 only overwrite mod recipes that come from the disabledModsList (if possible)

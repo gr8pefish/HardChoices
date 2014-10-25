@@ -19,13 +19,16 @@ buildscript {
 apply plugin: 'forge'
 
 //version = ModInformation.VERSION
-version = "1.7.10-0.6.5b"
+version = "0.8.2-MC1.7.10"
 group= "com.gr8pefish.hardchoices" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "HardChoices"
 
 minecraft {
     version = "1.7.10-10.13.0.1208"
     assetDir = "eclipse/assets"
+
+    replaceIn "ModInformation.java"
+    replace "@VERSION@",project.version
 }
 
 dependencies {

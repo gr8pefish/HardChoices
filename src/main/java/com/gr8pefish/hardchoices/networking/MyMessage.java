@@ -8,6 +8,7 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class MyMessage implements IMessage{
@@ -41,7 +42,11 @@ public class MyMessage implements IMessage{
 //                Logger.log("Got message in server: "+message.text);
                 CommonProxy.loadProxyData(ctx.getServerHandler().playerEntity);
             }
-
+//            }else if (ctx.side.isClient() && message.text.equals("updtPlyr")) {
+////                Logger.log("got client side message");
+//                EntityPlayer player = ctx.getServerHandler().playerEntity;
+//            }
+//            Logger.log("message received) clientSide:"+ctx.side.isClient()+"; "+message.text);
             return null; //I shouldn't need to return a message, I just need to update the player's data on the server side when I get a message from the client
         }
     }

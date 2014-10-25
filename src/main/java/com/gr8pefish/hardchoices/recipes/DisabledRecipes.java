@@ -1,15 +1,19 @@
 package com.gr8pefish.hardchoices.recipes;
 
+import com.gr8pefish.hardchoices.handlers.ConfigHandler;
 import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
@@ -21,36 +25,63 @@ Currently unused. I would like to eventually make each recipe that is an instanc
 
  */
 
+
 public class DisabledRecipes implements IRecipe { //DisabledShapedOreRecipe , ShapelessOreRecipe
 
+
+
 //    private IRecipe recipe = new IRecipe()
+//
+//    public DisabledRecipes(ShapedOreRecipe shapedOreRecipe) {
+//        new ShapedOreRecipe(shapedOreRecipe.getRecipeOutput(), shapedOreRecipe.getInput());
+//    }
+//
+//    public DisabledRecipes(ShapelessOreRecipe shapelessOreRecipe) {
+//        super();
+//    }
+//
+//    public DisabledRecipes(ShapedRecipes shapedRecipes) {
+//        super();
+//    }
+//
+//    public DisabledRecipes(ShapelessRecipes shapelessRecipes) {
+//        super();
+//    }
 
-    public DisabledRecipes(ShapedOreRecipe shapedOreRecipe) {
-        new ShapedOreRecipe(shapedOreRecipe.getRecipeOutput(), shapedOreRecipe.getInput());
+    private IRecipe newRecipe;
+    private IRecipe originalRecipe;
+
+
+
+    public DisabledRecipes(IRecipe originalRecipe){
+
+        DisabledHandler.registeredRecipes.iterator();
+
+        if (originalRecipe instanceof ShapedRecipes){
+
+            ShapedRecipes myShapedRecipe = new ShapedRecipes(((ShapedRecipes) originalRecipe).recipeHeight, ((ShapedRecipes) originalRecipe).recipeWidth, ((ShapedRecipes) originalRecipe).recipeItems, originalRecipe.getRecipeOutput());
+            Logger.log("Shaped recipe: ");
+        }
+        this.originalRecipe = originalRecipe;
+
+        GameRegistry.addRecipe(newRecipe);
+        CraftingManager.getInstance().getRecipeList().remove(originalRecipe);
+
     }
 
-    public DisabledRecipes(ShapelessOreRecipe shapelessOreRecipe) {
-        super();
-    }
+//    public static void init(ShapedRecipes shaped){
+//
+//        shapedRecipe = new DisabledRecipes(shaped);
+//
+//        GameRegistry.addRecipe(shapedRecipe); //put in new recipe
+//        CraftingManager.getInstance().getRecipeList().remove(shaped); //remove the old
+//
+//    }
 
-    public DisabledRecipes(ShapedRecipes shapedRecipes) {
-        super();
-    }
-
-    public DisabledRecipes(ShapelessRecipes shapelessRecipes) {
-        super();
-    }
 
 
     @Override
     public boolean matches(InventoryCrafting inv, World world) {
-        try {
-            Field field = inv.getClass().getField("eventHandler");
-            if (field.getClass().isInstance(Container.class)){
-                Logger.log("Got a container");
-            }
-
-        }catch (NoSuchFieldException e){Logger.log("Error with catching field 'eventHandler'");return false;}
         return false;
     }
 
