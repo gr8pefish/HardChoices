@@ -48,15 +48,14 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
     public void saveNBTData(NBTTagCompound compound) {
         //load in data, load config + check if name is present in data, if not, add it in
         //groups come solely from config, read every time (inefficient, but the only way to make it work with changed configs when a world is already made)
-        for (int i = 0; i < DisabledHandler.disabledModsList.size(); i++) {
-            for (DisabledMod modName : DisabledHandler.disabledModsList) {
-                if (this.disabledMods.containsKey(modName.getModId())) {
-                    extendedPlayerCompound.setBoolean(modName.getModId(), this.disabledMods.get(modName.getModId())); //save the stored value as what it was before (unnecessary?)
-                } else {
-                    this.disabledMods.put(modName.getModId(), modName.getDisabled());
-                    extendedPlayerCompound.setBoolean(modName.getModId(), modName.getDisabled()); //save the new value (as not disabled)
-                }
+        for (String modName : DisabledHandler.disabledModsList) {
+            if (this.disabledMods.containsKey(modName)) {
+                extendedPlayerCompound.setBoolean(modName, this.disabledMods.get(modName)); //save the stored value as what it was before (unnecessary?)
+            } else {
+                this.disabledMods.put(modName, false);
+                extendedPlayerCompound.setBoolean(modName, false); //save the new value (as not disabled)
             }
+
         }
         compound.setTag(EXTENDED_PLAYER_DISABLED_MODS, extendedPlayerCompound);
     }
@@ -76,10 +75,9 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 
 
     public void initDisabledMods(){
-        for (int i = 0; i < DisabledHandler.disabledModsList.size(); i++) {
-            for (DisabledMod modName : DisabledHandler.disabledModsList) {
-                this.disabledMods.put(modName.getModId(), modName.getDisabled());
-            }
+        for (String modName : DisabledHandler.disabledModsList) {
+            this.disabledMods.put(modName, false);
         }
+
     }
 }

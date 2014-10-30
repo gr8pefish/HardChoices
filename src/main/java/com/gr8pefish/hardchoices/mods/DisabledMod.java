@@ -67,28 +67,28 @@ public class DisabledMod {
         this.disabled = true;
     }
 
-    public boolean getBlacklistGroupDisabled(){
-        if (this.modGroup != null && this.modGroup.contains(this.modId)){
-            for (DisabledMod mod : DisabledHandler.disabledModsList){
-                if (this.modGroup.contains(mod.getModId()) && !mod.getModId().equals(this.getModId())){
-                    return mod.getDisabled();
-                }
-            }
-        }
-        return false;
-    }
+//    public boolean getBlacklistGroupDisabled(){
+//        if (this.modGroup != null && this.modGroup.contains(this.modId)){
+//            for (DisabledMod mod : DisabledHandler.disabledModsList){
+//                if (this.modGroup.contains(mod.getModId()) && !mod.getModId().equals(this.getModId())){
+//                    return mod.getDisabled();
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
-    public void disableGroupMods(EntityPlayer player){
-        for (DisabledMod mod : DisabledHandler.disabledModsList) {
-            if (this.modGroup.contains(mod.getModId()) && !mod.getModId().equals(this.getModId())){
-                mod.setDisabled();
-                ExtendedPlayer playerData = ExtendedPlayer.get(player);
-                playerData.disabledMods.put(mod.modId, true);
-
-                Logger.log("Disabled mod: "+mod.getModId());
-            }
-        }
-    }
+//    public void disableGroupMods(EntityPlayer player){
+//        for (DisabledMod mod : DisabledHandler.disabledModsList) {
+//            if (this.modGroup.contains(mod.getModId()) && !mod.getModId().equals(this.getModId())){
+//                mod.setDisabled();
+//                ExtendedPlayer playerData = ExtendedPlayer.get(player);
+//                playerData.disabledMods.put(mod.modId, true);
+//
+//                Logger.log("Disabled mod: "+mod.getModId());
+//            }
+//        }
+//    }
 
 //    public void getCurrentCraftingRecipe(EntityPlayer player, IInventory inventory){
 //        if inventory

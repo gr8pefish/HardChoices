@@ -1,5 +1,6 @@
 package com.gr8pefish.hardchoices.recipes;
 
+import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -10,7 +11,8 @@ public class DisabledShapedOreRecipe extends ShapedOreRecipe {
     public ShapedOreRecipe originalShapedOreRecipe;
 
     public DisabledShapedOreRecipe(ShapedOreRecipe shapedOreRecipe){
-        super(shapedOreRecipe.getRecipeOutput(), (Object[])shapedOreRecipe.getInput());
+//        super(shapedOreRecipe.getRecipeOutput(), ObfuscationReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shapedOreRecipe, "input"));
+        super(shapedOreRecipe.getRecipeOutput(), DisabledBaseRecipes.getInputs(shapedOreRecipe));
         this.originalShapedOreRecipe = shapedOreRecipe;
     }
 

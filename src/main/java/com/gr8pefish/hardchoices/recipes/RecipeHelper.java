@@ -16,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 
 import java.lang.reflect.Field;
@@ -25,15 +26,21 @@ import java.util.Set;
 
 public class RecipeHelper {
 
+    private static List<IRecipe> recipes;
+
+    @SuppressWarnings("unchecked")
+    public static void init(){
+        recipes = CraftingManager.getInstance().getRecipeList();
+    }
+
+
     private static final String fieldOne = "eventHandler";
     private static final String fieldTwo = "thePlayer";
     private static final String fieldThree = "thePlayer";
-    private static final String fieldFour = "crafters";
 
 //    private static final String fieldOne = "field_70465_c";
 //    private static final String fieldTwo = "field_75238_b";
 //    private static final String fieldThree = "field_82862_h";
-//    private static final String fieldFour = "field_75148_f";
 
 
 
@@ -44,14 +51,14 @@ public class RecipeHelper {
     Otherwise, the original output is returned.
      */
     public static ItemStack getCraftingResult(InventoryCrafting inventoryCrafting, IRecipe originalRecipe) {
+        Logger.log("Getting crafting result");
         try {
 //            Object instanceContainer = ObfuscationReflectionHelper.getPrivateValue(InventoryCrafting.class, inventoryCrafting, "eventHandler");
             Field container = inventoryCrafting.getClass().getDeclaredField(fieldOne);
             container.setAccessible(true);
             try {
                 Object instanceContainer = container.get(inventoryCrafting);
-                if (false) {
-//                if (instanceContainer.getClass().equals(ContainerWorkbench.class)) {
+                if (instanceContainer.getClass().equals(ContainerWorkbench.class)) {
                     ContainerWorkbench containerWorkbench = (ContainerWorkbench) instanceContainer;
                     SlotCrafting firstSlot = (SlotCrafting) containerWorkbench.getSlot(0);
                     try {
@@ -93,17 +100,6 @@ public class RecipeHelper {
                     } else{
                         return originalRecipe.getRecipeOutput().copy();
                     }
-//                    Container containerUsed = (Container) instanceContainer;
-//                    Logger.log("container");
-//                    try {
-//                        Field list = containerUsed.getClass().getSuperclass().getDeclaredField(fieldFour);
-//                        list.setAccessible(true);
-//                        ArrayList theList = (ArrayList) list.get(containerUsed);
-//
-//
-//                    } catch (NoSuchFieldException e) {
-//                        Logger.log("Illegal access to crafters");
-//                    }
                 }
             } catch (IllegalAccessException e) {
                 Logger.log("Illegal access to instance");
@@ -112,5 +108,11 @@ public class RecipeHelper {
             Logger.log("Couldn't get field");
         }
         return null;
+    }
+
+    public static void replaceRecipes(IRecipe originalrecipe){
+        IRecipe myRecipe = new DisabledRecipes(originalrecipe); //create my recipe
+        GameRegistry.addRecipe(myRecipe); //put in new recipe
+        recipes.remove(originalrecipe); //remove the old
     }
 }

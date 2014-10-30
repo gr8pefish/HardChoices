@@ -39,7 +39,7 @@ public class PlayerData {
 
     public static String getModIdFromItemStack(ItemStack stack){
         GameRegistry.UniqueIdentifier identifier = GameRegistry.findUniqueIdentifierFor(stack.getItem());
-        return identifier.modId;
+        return identifier.modId.toLowerCase().trim();
     }
 
     private static ArrayList<ArrayList<String>> initModGroupings(){

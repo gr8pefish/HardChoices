@@ -5,6 +5,8 @@ import java.util.*;
 import com.gr8pefish.hardchoices.players.PlayerData;
 import com.gr8pefish.hardchoices.recipes.DisabledBaseRecipes;
 import com.gr8pefish.hardchoices.mods.DisabledMod;
+import com.gr8pefish.hardchoices.recipes.RecipeHelper;
+import ibxm.Player;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
@@ -20,7 +22,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 @SuppressWarnings("rawtypes")
 public class DisabledHandler {
 
-    public static ArrayList<DisabledMod> disabledModsList = new ArrayList<DisabledMod>();
+    public static ArrayList<String> disabledModsList = new ArrayList<String>();
 
     private static ArrayList<ShapedOreRecipe> registeredShapedOreRecipes;
     private static ArrayList<ShapelessOreRecipe> registeredShapelessOreRecipes;
@@ -59,6 +61,7 @@ public class DisabledHandler {
         }
 
         initDisabledMods();
+        RecipeHelper.init();
         changeRecipes();
         PlayerData.initModGroups();
 	}
@@ -74,10 +77,11 @@ public class DisabledHandler {
                 Logger.log("Need more than one mod per set to disable: "+splitString[0]);
                 continue;
             }
-            for (String configModId : splitString){
-                DisabledMod disabledmod = new DisabledMod(configModId);
-                disabledModsList.add(disabledmod);
-            }
+            Collections.addAll(disabledModsList, splitString);
+//            for (String configModId : splitString){
+//                DisabledMod disabledmod = new DisabledMod(configModId);
+//                disabledModsList.add(configModId);
+//            }
         }
     }
 
@@ -85,15 +89,22 @@ public class DisabledHandler {
 
     public static void changeRecipes(){
         //TODO initialize for all recipes that implement IRecipe (dynamically if possible, so other mods' special recipe types work)
-
-        for (ShapedRecipes recipe : registeredShapedRecipes) {
-            DisabledBaseRecipes.init(recipe);
+        for (IRecipe recipe : registeredRecipes) {
+            if (recipe.getRecipeOutput() != null && disabledModsList.contains(PlayerData.getModIdFromItemStack(recipe.getRecipeOutput()))) { //not registering chisel correctly
+                RecipeHelper.replaceRecipes(recipe);
+            }
         }
 
-        for (ShapedOreRecipe recipe : registeredShapedOreRecipes) {
-            DisabledBaseRecipes.init(recipe);
-        }
+//        for (ShapedRecipes recipe : registeredShapedRecipes) {
+//            DisabledBaseRecipes.init(recipe);
+//        }
+//
+//        for (ShapedOreRecipe recipe : registeredShapedOreRecipes) {
+//            DisabledBaseRecipes.init(recipe);
+//        }
 
     }
+
+
 
 }
