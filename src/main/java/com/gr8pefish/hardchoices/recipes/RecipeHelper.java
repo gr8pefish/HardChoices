@@ -51,7 +51,6 @@ public class RecipeHelper {
     Otherwise, the original output is returned.
      */
     public static ItemStack getCraftingResult(InventoryCrafting inventoryCrafting, IRecipe originalRecipe) {
-        Logger.log("Getting crafting result");
         try {
 //            Object instanceContainer = ObfuscationReflectionHelper.getPrivateValue(InventoryCrafting.class, inventoryCrafting, "eventHandler");
             Field container = inventoryCrafting.getClass().getDeclaredField(fieldOne);

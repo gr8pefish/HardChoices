@@ -49,13 +49,15 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
         //load in data, load config + check if name is present in data, if not, add it in
         //groups come solely from config, read every time (inefficient, but the only way to make it work with changed configs when a world is already made)
         for (String modName : DisabledHandler.disabledModsList) {
-            if (this.disabledMods.containsKey(modName)) {
-                extendedPlayerCompound.setBoolean(modName, this.disabledMods.get(modName)); //save the stored value as what it was before (unnecessary?)
-            } else {
+            if (!this.disabledMods.containsKey(modName)) {
                 this.disabledMods.put(modName, false);
                 extendedPlayerCompound.setBoolean(modName, false); //save the new value (as not disabled)
             }
-
+//                extendedPlayerCompound.setBoolean(modName, this.disabledMods.get(modName)); //save the stored value as what it was before (unnecessary?)
+//            } else {
+//                this.disabledMods.put(modName, false);
+//                extendedPlayerCompound.setBoolean(modName, false); //save the new value (as not disabled)
+//            }
         }
         compound.setTag(EXTENDED_PLAYER_DISABLED_MODS, extendedPlayerCompound);
     }

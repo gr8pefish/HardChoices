@@ -11,14 +11,6 @@ public class CommonProxy {
 
     private static final Map<String, NBTTagCompound> extendedEntityData = new HashMap<String, NBTTagCompound>();
 
-	public void initSounds() {
-		
-	}
-
-	public void initRenderers() {
-		
-	}
-
     //Start of additional code to save the player's data somewhere where it won't disappear when they die.
 
     /**

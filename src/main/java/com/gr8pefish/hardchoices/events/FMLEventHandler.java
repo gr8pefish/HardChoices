@@ -29,7 +29,7 @@ public class FMLEventHandler {
         for (String modId : playerData.disabledMods.keySet()){
             if (modId.toLowerCase().trim().equals(identifier.modId.toLowerCase().trim())){
                 if (!playerData.disabledMods.get(modId)){
-                    if (!PlayerData.getBlacklistGroupDisabled(modId, event.player)){   //if mod group isn't disabled //TODO - firing when it shouldn't
+                    if (!PlayerData.getBlacklistGroupDisabled(modId, event.player)){   //if mod group isn't disabled //TODO - firing when it shouldn't ???
                         PlayerData.disableGroupMods(modId, event.player);              //disable them
                         CommonProxy.saveProxyData(event.player);                       //save changes
                         HardChoices.network.sendToServer(new MyMessage("updtCrftng")); //send message from client to server to update

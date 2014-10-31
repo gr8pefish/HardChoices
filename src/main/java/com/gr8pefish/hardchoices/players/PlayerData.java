@@ -46,7 +46,7 @@ public class PlayerData {
         ArrayList<ArrayList<String>> finalArrayList = new ArrayList<ArrayList<String>>();
         ArrayList<String> allModSets = ConfigHandler.blackList;
         for (String modGroup : allModSets) {
-            finalArrayList.add(new ArrayList<String>(Arrays.asList(modGroup.split(","))));
+            finalArrayList.add(new ArrayList<String>(Arrays.asList(modGroup.trim().toLowerCase().replaceAll("\\s+","").split(","))));
         }
         return finalArrayList;
     }
@@ -55,9 +55,9 @@ public class PlayerData {
         ExtendedPlayer thePlayer = ExtendedPlayer.get(player);
         for (ArrayList<String> set : modGroups) {
             if (set.contains(modid)) {
-                for (String modId : set){
-                    if (!modId.equals(modid)){
-                        return thePlayer.disabledMods.get(modId);
+                for (String setid : set){
+                    if (!setid.equals(modid) && thePlayer.disabledMods.get(setid) != null){
+                        return thePlayer.disabledMods.get(setid);
                     }
                 }
             }

@@ -77,11 +77,12 @@ public class DisabledHandler {
                 Logger.log("Need more than one mod per set to disable: "+splitString[0]);
                 continue;
             }
-            Collections.addAll(disabledModsList, splitString);
-//            for (String configModId : splitString){
+//            Collections.addAll(disabledModsList, splitString);
+            for (String configModId : splitString){
 //                DisabledMod disabledmod = new DisabledMod(configModId);
-//                disabledModsList.add(configModId);
-//            }
+                disabledModsList.add(configModId.toLowerCase().trim());
+                Logger.log("Adding the mod "+configModId.toLowerCase().trim()+" to the disabledList.");
+            }
         }
     }
 
