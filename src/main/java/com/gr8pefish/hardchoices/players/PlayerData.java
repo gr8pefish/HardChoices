@@ -1,13 +1,8 @@
 package com.gr8pefish.hardchoices.players;
 
-import com.gr8pefish.hardchoices.HardChoices;
 import com.gr8pefish.hardchoices.handlers.ConfigHandler;
-import com.gr8pefish.hardchoices.handlers.DisabledHandler;
-import com.gr8pefish.hardchoices.networking.NetworkingHelper;
 import com.gr8pefish.hardchoices.util.Logger;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -25,12 +20,10 @@ public class PlayerData {
     }
 
     public static boolean isModDisabledForPlayer(EntityPlayer player, ItemStack stack){
-
         ExtendedPlayer playerData = ExtendedPlayer.get(player);
         String modid = getModIdFromItemStack(stack);
         for (String modId : playerData.disabledMods.keySet()){
             if (modId.toLowerCase().trim().equals(modid.toLowerCase().trim())){
-//                Logger.log("Disabled mod "+modId+" : "+playerData.disabledMods.get(modId));
                 return playerData.disabledMods.get(modId);
             }
         }
@@ -72,7 +65,7 @@ public class PlayerData {
                 for (String modId : set) {
                     if (!modId.equals(modid) && !thePlayer.disabledMods.get(modId)) {
                         thePlayer.disabledMods.put(modId, true);
-                        if (NetworkingHelper.isClientSide(player)) {
+                        if (!player.worldObj.isRemote) {
                             Logger.log("Disabled the mod: " + modId); //Just so it only prints once
                         }
                     }

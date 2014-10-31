@@ -41,11 +41,11 @@ public class ConfigHandler {
         //TODO - these features eventually
 //		Property category2 = config.get("DisableItem", "disableItem", true);
 //		category2.comment = "Choose true if you would like the output of a mods mod's recipe to be a special 'disabled item'.\n"
-//							+"Enter false to simply have nothing appear instead.";
+//							+"Enter false to simply have nothing appear instead. Default is true.";
 //      useDisableItem = (category2.getBoolean());
 
 //		Property category3 = config.get("Gameplay", "gameplay", false);
-//		category2.comment = "Choose true if you would like the player's disabled mods to reset on death."
+//		category2.comment = "Choose true if you would like the player's disabled mods to reset on death. Default is false."
 //      resetOnDeath = (category3.getBoolean());
 		
 		config.save();
