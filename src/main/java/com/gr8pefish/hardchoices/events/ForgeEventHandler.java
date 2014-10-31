@@ -23,7 +23,7 @@ public class ForgeEventHandler {
     @SubscribeEvent
     public void onDeath(LivingDeathEvent event){
         if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
-            //Add in config death option here
+            //TODO Add in config death option here
             CommonProxy.saveProxyData((EntityPlayer) event.entity);
         }
     }
@@ -31,7 +31,6 @@ public class ForgeEventHandler {
     @SubscribeEvent
     public void onEntityJoinWorld(EntityJoinWorldEvent event){
         if (!event.entity.worldObj.isRemote && event.entity instanceof EntityPlayer){
-            //check if the world is a new one
             CommonProxy.loadProxyData((EntityPlayer) event.entity);
         }
     }

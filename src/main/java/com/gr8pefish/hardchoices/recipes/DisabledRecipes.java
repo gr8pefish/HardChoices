@@ -1,23 +1,12 @@
 package com.gr8pefish.hardchoices.recipes;
 
-import com.gr8pefish.hardchoices.handlers.ConfigHandler;
-import com.gr8pefish.hardchoices.util.Logger;
-import com.gr8pefish.hardchoices.mods.DisabledMod;
-import com.gr8pefish.hardchoices.handlers.DisabledHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.inventory.Container;
+
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.RecipeSorter;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.lang.reflect.Field;
 
 /*
 

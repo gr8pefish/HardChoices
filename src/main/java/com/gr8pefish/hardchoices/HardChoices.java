@@ -29,13 +29,15 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 TODO
 
+Bugs:
+Not saving correctly
+
 Immediate:
 Use obfuscationReflectionHelper
 change it so each save/world has new data for the player (onEntityConstructing?)
 on recipeHelper fix dynamic container not syncing to client
 
 Later:
-only overwrite mod recipes that come from the disabledModsList (if possible)
 add in tooltip that warns player about deleting mod
 commands to directly enable/disable mods (if OP)
 config option dying resets disabled mods (off by default)

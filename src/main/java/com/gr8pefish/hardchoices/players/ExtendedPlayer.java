@@ -1,10 +1,7 @@
 package com.gr8pefish.hardchoices.players;
 
-import com.gr8pefish.hardchoices.HardChoices;
 import com.gr8pefish.hardchoices.ModInformation;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
-import com.gr8pefish.hardchoices.mods.DisabledMod;
-import com.gr8pefish.hardchoices.networking.MyMessage;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,14 +20,12 @@ A player class that is extended to include a map of the disabled mods for that p
 public class ExtendedPlayer implements IExtendedEntityProperties {
 
     public final static String EXTENDED_PLAYER_DISABLED_MODS = ModInformation.MODID;
-    private final EntityPlayer player;
     public HashMap<String, Boolean> disabledMods;
 
     public NBTTagCompound extendedPlayerCompound = new NBTTagCompound();
 
 
     public ExtendedPlayer(EntityPlayer player){
-        this.player = player;
         this.disabledMods = new HashMap<String, Boolean>();
         initDisabledMods();
     }
@@ -52,12 +47,9 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
             if (!this.disabledMods.containsKey(modName)) {
                 this.disabledMods.put(modName, false);
                 extendedPlayerCompound.setBoolean(modName, false); //save the new value (as not disabled)
+            }else{
+                extendedPlayerCompound.setBoolean(modName, this.disabledMods.get(modName)); //save the stored value as what it was before
             }
-//                extendedPlayerCompound.setBoolean(modName, this.disabledMods.get(modName)); //save the stored value as what it was before (unnecessary?)
-//            } else {
-//                this.disabledMods.put(modName, false);
-//                extendedPlayerCompound.setBoolean(modName, false); //save the new value (as not disabled)
-//            }
         }
         compound.setTag(EXTENDED_PLAYER_DISABLED_MODS, extendedPlayerCompound);
     }
@@ -72,8 +64,7 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
     }
 
     @Override
-    public void init(Entity entity, World world) {
-    }
+    public void init(Entity entity, World world) { }
 
 
     public void initDisabledMods(){

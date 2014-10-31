@@ -1,28 +1,18 @@
 package com.gr8pefish.hardchoices.recipes;
 
-import com.gr8pefish.hardchoices.HardChoices;
-import com.gr8pefish.hardchoices.networking.MyMessage;
-import com.gr8pefish.hardchoices.networking.NetworkingHelper;
 import com.gr8pefish.hardchoices.util.Logger;
-import com.gr8pefish.hardchoices.handlers.DisabledHandler;
-import com.gr8pefish.hardchoices.mods.DisabledMod;
 import com.gr8pefish.hardchoices.players.PlayerData;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class RecipeHelper {
 
