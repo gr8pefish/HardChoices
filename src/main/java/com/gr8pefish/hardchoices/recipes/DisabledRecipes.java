@@ -43,7 +43,8 @@ public class DisabledRecipes implements IRecipe { //DisabledShapedOreRecipe , Sh
     @Override
     //Checks, via a helper method, what the crafting result should be (null or the original result)
     public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
-        return RecipeHelper.getCraftingResult(inventoryCrafting, originalRecipe);
+        return RecipeHelper.getCraftingResultDev(originalRecipe);
+//          return RecipeHelper.getCraftingResult(inventoryCrafting, originalRecipe);
     }
 
 }
