@@ -19,7 +19,7 @@ buildscript {
 apply plugin: 'forge'
 
 //version = ModInformation.VERSION
-version = "0.9.5-MC1.7.10"
+version = "0.9.7-MC1.7.10"
 group= "com.gr8pefish.hardchoices" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "HardChoices"
 

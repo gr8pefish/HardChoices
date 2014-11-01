@@ -77,7 +77,7 @@ public class HardChoices {
 
     @EventHandler
     public void serverLoad(FMLServerStartingEvent event){
-        //register minecrfat command
+        //register minecraft command
         event.registerServerCommand(new InformationCommand());
     }
 	
