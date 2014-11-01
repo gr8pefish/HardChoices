@@ -1,11 +1,13 @@
 package com.gr8pefish.hardchoices.recipes;
 
+import com.gr8pefish.hardchoices.players.ExtendedPlayer;
 import com.gr8pefish.hardchoices.util.Logger;
 import com.gr8pefish.hardchoices.players.PlayerData;
 import cpw.mods.fml.common.ObfuscationReflectionHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -32,6 +34,16 @@ public class RecipeHelper {
 //    private static final String fieldTwo = "field_75238_b";
 //    private static final String fieldThree = "field_82862_h";
 
+    public static ItemStack getCraftingResultDev(IRecipe originalRecipe){
+        EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        ExtendedPlayer myPlayer = ExtendedPlayer.get(player);
+        Logger.log("Mod disabled? "+"("+PlayerData.getModIdFromItemStack(originalRecipe.getRecipeOutput())+") :" + PlayerData.isModDisabledForPlayerDev(myPlayer, originalRecipe.getRecipeOutput()));
+        if (PlayerData.isModDisabledForPlayerDev(myPlayer, originalRecipe.getRecipeOutput())) {
+            return null;
+        } else{
+            return originalRecipe.getRecipeOutput().copy();
+        }
+    }
 
 
     /*
@@ -55,11 +67,16 @@ public class RecipeHelper {
                         player.setAccessible(true);
                         try {
                             EntityPlayer thePlayer = (EntityPlayer) player.get(firstSlot);
-                            if (PlayerData.isModDisabledForPlayer(thePlayer, originalRecipe.getRecipeOutput())) {
-                                return null;
-//                              return new ItemStack(ItemRegistry.disabledItem); //Feature: make it not be removable from crafting grid
+                            if (thePlayer.worldObj.isRemote) { //client
+                                getCraftingResultDev(originalRecipe);
                             } else {
-                                return originalRecipe.getRecipeOutput().copy();
+                                Logger.log("Mod disabled? " + "(" + PlayerData.getModIdFromItemStack(originalRecipe.getRecipeOutput()) + ") :" + PlayerData.isModDisabledForPlayer(thePlayer, originalRecipe.getRecipeOutput()));
+                                if (PlayerData.isModDisabledForPlayer(thePlayer, originalRecipe.getRecipeOutput())) {
+                                    return null;
+                                    //                              return new ItemStack(ItemRegistry.disabledItem); //Feature: make it not be removable from crafting grid
+                                } else {
+                                    return originalRecipe.getRecipeOutput().copy();
+                                }
                             }
                         } catch (IllegalAccessException e) {
                             Logger.log("No access to player");

@@ -22,12 +22,21 @@ public class PlayerData {
     public static boolean isModDisabledForPlayer(EntityPlayer player, ItemStack stack){
         ExtendedPlayer playerData = ExtendedPlayer.get(player);
         String modid = getModIdFromItemStack(stack);
-        for (String modId : playerData.disabledMods.keySet()){
-            if (modId.toLowerCase().trim().equals(modid.toLowerCase().trim())){
-                return playerData.disabledMods.get(modId);
-            }
-        }
-        return false;
+        return playerData.disabledMods.get(modid);
+//        Logger.log("checking if "+modid+ "in disabledMods");
+//        for (String modId : playerData.disabledMods.keySet()){
+//            if (modId.toLowerCase().trim().equals(modid.toLowerCase().trim())){
+//                Logger.log("found "+modid+" in disabledMods, returning "+playerData.disabledMods.get(modId));
+//                Logger.log(playerData.disabledMods.get(modid));
+//                return playerData.disabledMods.get(modId);
+//            }
+//        }
+//        return false;
+    }
+
+    public static boolean isModDisabledForPlayerDev(ExtendedPlayer player, ItemStack stack){
+        String modid = getModIdFromItemStack(stack);
+        return player.disabledMods.get(modid);
     }
 
     public static String getModIdFromItemStack(ItemStack stack){
