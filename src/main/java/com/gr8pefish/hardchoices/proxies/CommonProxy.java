@@ -45,7 +45,7 @@ public class CommonProxy {
     /**
      * Makes it look nicer in the methods save/loadProxyData
      */
-    public static String getSaveKey(EntityPlayer player) {
+    private static String getSaveKey(EntityPlayer player) {
         return player.getDisplayName() + ":" + ExtendedPlayer.EXTENDED_PLAYER_DISABLED_MODS;
     }
 

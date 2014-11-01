@@ -11,15 +11,14 @@ public class NetworkingHandler {
 
     public static void initPackets() {
         network = NetworkRegistry.INSTANCE.newSimpleChannel(ModInformation.CHANNEL);
-        registerMessage(UpdateCraftingMessage.Handler.class, UpdateCraftingMessage.class);
-        registerMessage(UpdatePlayerMessage.Handler.class, UpdatePlayerMessage.class);
+        registerMessage(UpdateCraftingMessage.Handler.class, UpdateCraftingMessage.class, Side.SERVER);
+        registerMessage(UpdatePlayerMessage.Handler.class, UpdatePlayerMessage.class, Side.CLIENT);
     }
 
     private static int nextPacketId = 0;
 
-    private static void registerMessage(Class packet, Class message) {
-        network.registerMessage(packet, message, nextPacketId, Side.CLIENT);
-        network.registerMessage(packet, message, nextPacketId, Side.SERVER);
+    private static void registerMessage(Class packet, Class message, Side side) {
+        network.registerMessage(packet, message, nextPacketId, side);
         nextPacketId++;
     }
 }
