@@ -1,7 +1,7 @@
 package com.gr8pefish.hardchoices.events;
 
-import com.gr8pefish.hardchoices.HardChoices;
-import com.gr8pefish.hardchoices.networking.MyMessage;
+import com.gr8pefish.hardchoices.networking.UpdateCraftingMessage;
+import com.gr8pefish.hardchoices.networking.NetworkingHandler;
 import com.gr8pefish.hardchoices.players.ExtendedPlayer;
 import com.gr8pefish.hardchoices.players.PlayerData;
 import com.gr8pefish.hardchoices.proxies.CommonProxy;
@@ -26,7 +26,7 @@ public class FMLEventHandler {
                     if (!PlayerData.getBlacklistGroupDisabled(modId, event.player)){   //if mod group isn't disabled //TODO - firing when it shouldn't? -recheck
                         PlayerData.disableGroupMods(modId, event.player);              //disable them
                         CommonProxy.saveProxyData(event.player);                       //save changes
-                        HardChoices.network.sendToServer(new MyMessage("updtCrftng")); //send message from client to server to update
+                        NetworkingHandler.network.sendToServer(new UpdateCraftingMessage("updtCrftng")); //send message from client to server to update
                     }
                 }
             }
