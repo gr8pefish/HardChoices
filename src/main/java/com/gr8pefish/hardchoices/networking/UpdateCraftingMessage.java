@@ -1,13 +1,11 @@
 package com.gr8pefish.hardchoices.networking;
 
 import com.gr8pefish.hardchoices.proxies.CommonProxy;
-import com.gr8pefish.hardchoices.util.Logger;
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.nbt.NBTTagCompound;
 
 /*
 Message to tell the server player to update it's data. TODO-change to simpler data sent (test in message isn't really used)

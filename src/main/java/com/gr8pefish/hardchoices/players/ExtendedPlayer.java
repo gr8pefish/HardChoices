@@ -2,13 +2,9 @@ package com.gr8pefish.hardchoices.players;
 
 import com.gr8pefish.hardchoices.ModInformation;
 import com.gr8pefish.hardchoices.handlers.DisabledHandler;
-import com.gr8pefish.hardchoices.util.Logger;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IExtendedEntityProperties;
 
@@ -23,12 +19,10 @@ public class ExtendedPlayer implements IExtendedEntityProperties {
 
     public final static String EXTENDED_PLAYER_DISABLED_MODS = ModInformation.MODID; //unique key, so that I get the extended player form my mod
     public HashMap<String, Boolean> disabledMods;
-    private EntityPlayer player; //unused?
     public NBTTagCompound extendedPlayerCompound = new NBTTagCompound();
 
 
     public ExtendedPlayer(EntityPlayer player){
-        this.player = player;
         this.disabledMods = new HashMap<String, Boolean>();
         initDisabledMods();
     }

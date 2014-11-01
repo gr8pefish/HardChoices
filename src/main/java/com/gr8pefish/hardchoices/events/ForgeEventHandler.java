@@ -1,14 +1,10 @@
 package com.gr8pefish.hardchoices.events;
 
-import com.gr8pefish.hardchoices.networking.UpdateCraftingMessage;
-import com.gr8pefish.hardchoices.networking.NetworkingHandler;
-import com.gr8pefish.hardchoices.networking.UpdatePlayerMessage;
+
 import com.gr8pefish.hardchoices.players.ExtendedPlayer;
 import com.gr8pefish.hardchoices.proxies.CommonProxy;
-import com.gr8pefish.hardchoices.util.Logger;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;

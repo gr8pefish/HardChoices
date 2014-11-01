@@ -3,7 +3,6 @@ package com.gr8pefish.hardchoices.proxies;
 import com.gr8pefish.hardchoices.networking.NetworkingHandler;
 import com.gr8pefish.hardchoices.networking.UpdatePlayerMessage;
 import com.gr8pefish.hardchoices.players.ExtendedPlayer;
-import com.gr8pefish.hardchoices.util.Logger;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

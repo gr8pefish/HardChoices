@@ -5,8 +5,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.RecipeSorter;
-
 
 /*
 Includes all crafting table recipes, furnaceRecipe, pulverizerRecipe, eic. are not included here.

@@ -15,7 +15,7 @@ public class InformationCommand implements ICommand {
 
     private List aliases= new ArrayList();
 
-    @SuppressWarnings("unckecked")
+    @SuppressWarnings("unchecked")
     public InformationCommand() {
         this.aliases.add("dis");
     }
@@ -89,6 +89,7 @@ public class InformationCommand implements ICommand {
         return false;
     }
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public int compareTo(Object o) {
         return 0;
