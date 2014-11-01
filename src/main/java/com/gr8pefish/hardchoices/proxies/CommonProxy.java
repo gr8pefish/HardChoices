@@ -16,6 +16,7 @@ public class CommonProxy {
 
     private static final Map<String, NBTTagCompound> extendedEntityData = new HashMap<String, NBTTagCompound>();
 
+    //test
     /**
      * Returns a side-appropriate EntityPlayer for use during message handling
      */
