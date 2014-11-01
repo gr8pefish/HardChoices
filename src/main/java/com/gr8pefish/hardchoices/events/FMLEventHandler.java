@@ -12,18 +12,17 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class FMLEventHandler {
 
     /*
-    When an item is crafted, check if the item is from a mod-set in the config file, and disable the mods in it's set if needed
+    When an item is crafted, check if the item is from a mod-set in the config file, and disable the mods in that mod's set if needed
      */
 
-    @SubscribeEvent //fires on both client and server
+    @SubscribeEvent
     public void itemCraftedEvent(PlayerEvent.ItemCraftedEvent event) { //fired after pulling the item away
         GameRegistry.UniqueIdentifier identifier =  GameRegistry.findUniqueIdentifierFor(event.crafting.getItem());
-//        Logger.log(event.player.getDisplayName() + " crafted an item from the mod " + identifier.modId + " in the inventory " + event.craftMatrix.getInventoryName());
         ExtendedPlayer playerData = ExtendedPlayer.get(event.player);
         for (String modId : playerData.disabledMods.keySet()){
-            if (modId.toLowerCase().trim().equals(identifier.modId.toLowerCase().trim())){
+            if (modId.toLowerCase().trim().equals(identifier.modId.toLowerCase().trim())){ //trims unnecessary?
                 if (!playerData.disabledMods.get(modId)){
-                    if (!PlayerData.getBlacklistGroupDisabled(modId, event.player)){   //if mod group isn't disabled //TODO - firing when it shouldn't? -recheck
+                    if (!PlayerData.getBlacklistGroupDisabled(modId, event.player)){   //if mod group isn't disabled
                         PlayerData.disableGroupMods(modId, event.player);              //disable them
                         CommonProxy.saveProxyData(event.player);                       //save changes
                         NetworkingHandler.network.sendToServer(new UpdateCraftingMessage("updtCrftng")); //send message from client to server to update

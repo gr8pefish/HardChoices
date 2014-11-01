@@ -14,6 +14,8 @@ import java.util.Set;
 public class InformationCommand implements ICommand {
 
     private List aliases= new ArrayList();
+
+    @SuppressWarnings("unckecked")
     public InformationCommand() {
         this.aliases.add("dis");
     }
@@ -35,21 +37,19 @@ public class InformationCommand implements ICommand {
 
     /*
     Called when the command is used. Currently prints information to the chat.
+    Information printed is composed of the groups of mods in the config and the currently disabled mods (if any)
     TODO - make it format nicer in the chat
      */
 
     @Override
     public void processCommand(ICommandSender sender, String[] strings) {
 
-//        HardChoices.network.sendToServer(new MyMessage("update player data"));
-        Logger.log("processCommand");
         EntityPlayer player;
         if(sender instanceof EntityPlayer) {
             player = (EntityPlayer) sender;
 
             ChatComponentText groups = new ChatComponentText("");
             ChatComponentText disabled = new ChatComponentText("Disabled: ");
-
 
             boolean addedDisabledMods = false;
             ExtendedPlayer newPlayer = ExtendedPlayer.get(player);

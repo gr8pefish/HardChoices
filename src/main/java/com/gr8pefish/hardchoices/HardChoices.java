@@ -27,15 +27,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 TODO
 
 Bugs:
-Not saving correctly, debug that!
-    Initializing new player as extended when it shouldn't, try overwriting the init disabledMods to check to see if there are already mods disabled, because the command works as intended.
-    Probably due to discrepancy between the server player and the client player
-        Use packets to send NBTTagCompound to client player to update it's disabledMods field to the compound ion the message (containing the saved data of the server player)
+
 
 Immediate:
-Use obfuscationReflectionHelper
 change it so each save/world has new data for the player (onEntityConstructing?)
-on recipeHelper fix dynamic container not syncing to client
 
 Later:
 add in tooltip that warns player about deleting mod
@@ -61,25 +56,28 @@ public class HardChoices {
 
     @EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+        //register packets and config file
         NetworkingHandler.initPackets();
         config=event.getSuggestedConfigurationFile();
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event){
+        //register both my event handlers here
         FMLCommonHandler.instance().bus().register(new FMLEventHandler());
         MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
+        //read from config and update recipes as needed
 		DisabledHandler.init();
         DisabledHandler.changeRecipes();
 	}
 
     @EventHandler
-    public void serverLoad(FMLServerStartingEvent event)
-    {
+    public void serverLoad(FMLServerStartingEvent event){
+        //register minecrfat command
         event.registerServerCommand(new InformationCommand());
     }
 	

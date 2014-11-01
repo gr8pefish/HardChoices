@@ -24,6 +24,7 @@ public class CommonProxy {
     }
 
     //Start of additional code to save the player's data somewhere where it won't disappear when they die.
+    //Credit goes to coolAlias, a lot of this was copied from their tutorial mod
 
     /**
      * Adds an entity's custom data to the map for temporary storage
@@ -49,27 +50,33 @@ public class CommonProxy {
         return player.getDisplayName() + ":" + ExtendedPlayer.EXTENDED_PLAYER_DISABLED_MODS;
     }
 
+    /*
+     *   Saves the data in the proxy so that the data is not deleted when the client player dies or exits the game.
+     */
 
     public static void saveProxyData(EntityPlayer player) {
+
         ExtendedPlayer playerData = ExtendedPlayer.get(player);
         NBTTagCompound savedData = new NBTTagCompound();
 
         playerData.saveNBTData(savedData);
-        Logger.log("storing proxy data");
         CommonProxy.storeEntityData(getSaveKey(player), savedData);
     }
 
+    /*
+     * Loads the data from the proxy, and then updates the client to know that changes have been made.
+     */
 
     public static void loadProxyData(EntityPlayer player) {
-        Logger.log("starting the loading of proxy data....");
+
         ExtendedPlayer playerData = ExtendedPlayer.get(player);
         NBTTagCompound savedData = CommonProxy.getEntityData(getSaveKey(player));
 
         if(savedData != null) {
-            Logger.log("loading proxy data");
             playerData.loadNBTData(savedData);
         }
 
+        //update the client from the server data via this message
         NetworkingHandler.network.sendTo(new UpdatePlayerMessage(player), (EntityPlayerMP) player);
 
     }

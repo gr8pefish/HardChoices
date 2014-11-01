@@ -10,7 +10,11 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
+/*
+ Message to get the data from the server player to the client player
+ */
 public class UpdatePlayerMessage implements  IMessage{
+
     private NBTTagCompound compound;
 
     public UpdatePlayerMessage() {}

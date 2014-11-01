@@ -19,22 +19,8 @@ public class PlayerData {
         modGroups = initModGroupings();
     }
 
-    public static boolean isModDisabledForPlayer(EntityPlayer player, ItemStack stack){
-        ExtendedPlayer playerData = ExtendedPlayer.get(player);
-        String modid = getModIdFromItemStack(stack);
-        return playerData.disabledMods.get(modid);
-//        Logger.log("checking if "+modid+ "in disabledMods");
-//        for (String modId : playerData.disabledMods.keySet()){
-//            if (modId.toLowerCase().trim().equals(modid.toLowerCase().trim())){
-//                Logger.log("found "+modid+" in disabledMods, returning "+playerData.disabledMods.get(modId));
-//                Logger.log(playerData.disabledMods.get(modid));
-//                return playerData.disabledMods.get(modId);
-//            }
-//        }
-//        return false;
-    }
-
-    public static boolean isModDisabledForPlayerDev(ExtendedPlayer player, ItemStack stack){
+    //simply returns the boolean value of the mod (referring to if it is disabled or not) for the player
+    public static boolean isModDisabledForPlayer(ExtendedPlayer player, ItemStack stack){
         String modid = getModIdFromItemStack(stack);
         return player.disabledMods.get(modid);
     }
@@ -44,15 +30,18 @@ public class PlayerData {
         return identifier.modId.toLowerCase().trim();
     }
 
+    //initializes the mod groupings, reading form the config file (stripping the spaces away and making it all lowercase first)
     private static ArrayList<ArrayList<String>> initModGroupings(){
-        ArrayList<ArrayList<String>> finalArrayList = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> tempArrayList = new ArrayList<ArrayList<String>>();
         ArrayList<String> allModSets = ConfigHandler.blackList;
         for (String modGroup : allModSets) {
-            finalArrayList.add(new ArrayList<String>(Arrays.asList(modGroup.trim().toLowerCase().replaceAll("\\s+","").split(","))));
+            tempArrayList.add(new ArrayList<String>(Arrays.asList(modGroup.trim().toLowerCase().replaceAll("\\s+","").split(","))));
         }
-        return finalArrayList;
+        return tempArrayList;
     }
 
+    //returns the boolean disabled value of a mod in the mod group of the mod passed in as a parameter
+    //TODO - make sure it checks all the mods in teh groups, so changing teh config file of a disabled group after launching/playing doesn't cause errors
     public static boolean getBlacklistGroupDisabled(String modid, EntityPlayer player){
         ExtendedPlayer thePlayer = ExtendedPlayer.get(player);
         for (ArrayList<String> set : modGroups) {
@@ -67,6 +56,7 @@ public class PlayerData {
         return false;
     }
 
+    //sets the boolean disabled value of each mod in the grouping of mods to true (i.e. it is indeed disabled)
     public static void disableGroupMods(String modid, EntityPlayer player){
         ExtendedPlayer thePlayer = ExtendedPlayer.get(player);
         for (ArrayList<String> set : modGroups) {

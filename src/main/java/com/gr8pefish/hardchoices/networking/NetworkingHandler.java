@@ -5,6 +5,10 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 
+/*
+Class to initialize all of the low level networking necessities
+ */
+
 public class NetworkingHandler {
 
     public static SimpleNetworkWrapper network;
@@ -17,6 +21,7 @@ public class NetworkingHandler {
 
     private static int nextPacketId = 0;
 
+    @SuppressWarnings({"unchecked"})
     private static void registerMessage(Class packet, Class message, Side side) {
         network.registerMessage(packet, message, nextPacketId, side);
         nextPacketId++;

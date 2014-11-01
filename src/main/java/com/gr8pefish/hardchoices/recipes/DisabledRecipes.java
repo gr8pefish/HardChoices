@@ -9,20 +9,15 @@ import net.minecraftforge.oredict.RecipeSorter;
 
 
 /*
-
-Currently unused. I would like to eventually make each recipe that is an instance of IRecipe follow my other classes, but that will have to wait until I fix the more basic issues.
-
+Includes all crafting table recipes, furnaceRecipe, pulverizerRecipe, eic. are not included here.
  */
 
-
-public class DisabledRecipes implements IRecipe { //DisabledShapedOreRecipe , ShapelessOreRecipe
+public class DisabledRecipes implements IRecipe {
 
     private IRecipe originalRecipe;
 
     public DisabledRecipes(IRecipe originalRecipe){
         this.originalRecipe = originalRecipe;
-
-
     }
 
     @Override
@@ -43,8 +38,7 @@ public class DisabledRecipes implements IRecipe { //DisabledShapedOreRecipe , Sh
     @Override
     //Checks, via a helper method, what the crafting result should be (null or the original result)
     public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
-        return RecipeHelper.getCraftingResultDev(originalRecipe);
-//          return RecipeHelper.getCraftingResult(inventoryCrafting, originalRecipe);
+        return RecipeHelper.getCraftingResult(originalRecipe);
     }
 
 }

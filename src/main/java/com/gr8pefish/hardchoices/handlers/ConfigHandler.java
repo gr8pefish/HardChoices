@@ -8,11 +8,10 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
-
 public class ConfigHandler {
 
     public static ArrayList<String> blackList;
-    //public static Boolean useDisableItem;
+    //public static Boolean useDisableItem; //TODO - check feasibility
     //public static Boolean resetOnDeath;
 
 	public static void init(File file)
